@@ -1,0 +1,20 @@
+from_latest_tag = false
+ignore_merge_commits = false
+branch_whitelist = []
+pre_bump_hooks = []
+post_bump_hooks = []
+pre_package_bump_hooks = []
+post_package_bump_hooks = []
+
+[commit_types]
+iac = { changelog_title = "Infrastructure as Code" }
+
+[changelog]
+path = "CHANGELOG.md"
+authors = [
+  { signature = "Bram Lo", username = "lo-b" },
+]
+
+[bump_profiles]
+
+[packages]
