@@ -35,7 +35,7 @@ jobs:
         id: init
         run: |
           terraform init \
-          -backend-config="bucket=$STATE_BUCKET_NAME" \
+          -backend-config="bucket=${{ secrets.STATE_BUCKET_NAME }}" \
           -backend-config="prefix=terraform/state" \
 
       - name: Terraform Validate
