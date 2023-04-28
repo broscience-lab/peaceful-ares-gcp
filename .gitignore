@@ -166,3 +166,6 @@ tags
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/terraform,vim,jetbrains+all,visualstudiocode
+
+# ignore backend conf file
+backend.conf
