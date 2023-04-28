@@ -16,6 +16,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Authenticate gcloud cli
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}"
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
