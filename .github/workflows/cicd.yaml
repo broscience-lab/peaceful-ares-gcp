@@ -45,7 +45,17 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false
+        run: |
+          terraform plan -no-color -input=false \
+          -var "gcp_project=${{ secrets.TF_VAR_GCP_PROJECT }}" \
+          -var "gcp_region=${{ secrets.TF_VAR_GCP_REGION }}" \
+          -var "gcp_zone=${{ secrets.TF_VAR_GCP_ZONE }}" \
+          -var "gcs_bucket_name=${{ secrets.TF_VAR_GCS_BUCKET_NAME }}" \
+          -var "gar_repository_id=${{ secrets.TF_VAR_GAR_REPOSITORY_ID }}" \
+          -var "cloud_run_name=${{ secrets.TF_VAR_CLOUD_RUN_NAME }}" \
+          -var "cloud_run_image_name=${{ secrets.TF_VAR_CLOUD_RUN_IMAGE_NAME }}" \
+          -var "cloud_run_image_tag=${{ secrets.TF_VAR_CLOUD_RUN_IMAGE_TAG }}" \
+          -var "cloud_run_container_port=${{ secrets.TF_VAR_CLOUD_RUN_CONTAINER_PORT }}"
         continue-on-error: true
 
       - name: Update Pull Request
@@ -84,4 +94,14 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: |
+          terraform apply -auto-approve -input=false \
+          -var "gcp_project=${{ secrets.TF_VAR_GCP_PROJECT }}" \
+          -var "gcp_region=${{ secrets.TF_VAR_GCP_REGION }}" \
+          -var "gcp_zone=${{ secrets.TF_VAR_GCP_ZONE }}" \
+          -var "gcs_bucket_name=${{ secrets.TF_VAR_GCS_BUCKET_NAME }}" \
+          -var "gar_repository_id=${{ secrets.TF_VAR_GAR_REPOSITORY_ID }}" \
+          -var "cloud_run_name=${{ secrets.TF_VAR_CLOUD_RUN_NAME }}" \
+          -var "cloud_run_image_name=${{ secrets.TF_VAR_CLOUD_RUN_IMAGE_NAME }}" \
+          -var "cloud_run_image_tag=${{ secrets.TF_VAR_CLOUD_RUN_IMAGE_TAG }}" \
+          -var "cloud_run_container_port=${{ secrets.TF_VAR_CLOUD_RUN_CONTAINER_PORT }}"
