@@ -31,7 +31,7 @@ resource "google_storage_bucket" "default" {
   }
 }
 
-resource "google_artifact_registry_repository" "broscience_registry" {
+resource "google_artifact_registry_repository" "peaceful_ares_registry" {
   location      = var.gcp_region
   repository_id = "${var.gcp_project}-registry"
   description   = "Docker registry for storing docker images for webapp"
