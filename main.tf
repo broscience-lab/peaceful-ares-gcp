@@ -106,3 +106,8 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
 
   policy_data = data.google_iam_policy.noauth.policy_data
 }
+
+moved {
+  from = google_artifact_registry_repository.broscience_registry
+  to   = google_artifact_registry_repository.peaceful_ares_registry
+}
