@@ -1,0 +1,13 @@
+name: Deploy
+run-name: Deploy delivered image using terraform.
+
+on:
+  repository_dispatch:
+    types: [deploy-event]
+jobs:
+  myEvent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Print received payload message...
+        run: echo "Payload ==> ${{ github.event.client_payload.message }}"
