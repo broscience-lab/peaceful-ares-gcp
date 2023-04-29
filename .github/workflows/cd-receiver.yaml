@@ -5,9 +5,9 @@ on:
   repository_dispatch:
     types: [deploy-event]
 jobs:
-  myEvent:
+  deploy-to-prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Print received payload message...
-        run: echo "Payload ==> ${{ github.event.client_payload.message }}"
+      - name: "(TEST) :: Replace tag"
+        run: sed -i -E 's/(.image = )(.*):(.*)/\1\2:${{ github.event.client_payload.message }}"/' ./main.tf
