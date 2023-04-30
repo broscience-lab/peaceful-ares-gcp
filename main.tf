@@ -45,7 +45,7 @@ resource "google_cloud_run_v2_service" "webapp_cloudrun_service" {
 
   template {
     containers {
-      image = "${var.gcp_region}-docker.pkg.dev/${var.gcp_project}/${var.gar_repository_id}/${var.cloud_run_image_name}:"
+      image = "${var.gcp_region}-docker.pkg.dev/${var.gcp_project}/${var.gar_repository_id}/${var.cloud_run_image_name}:fc1342c"
       ports {
         container_port = var.cloud_run_container_port
       }
