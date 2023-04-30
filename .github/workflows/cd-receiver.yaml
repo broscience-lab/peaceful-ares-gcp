@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.AUTO_COMMIT_PAT }}
       - name: "Replace image tag"
         run: sed -i -E 's/(.image = )(.*):(.*)/\1\2:${{ github.event.client_payload.message }}"/' ./main.tf
 
