@@ -9,5 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "(TEST) :: Replace tag"
+      - name: "Replace image tag"
         run: sed -i -E 's/(.image = )(.*):(.*)/\1\2:${{ github.event.client_payload.message }}"/' ./main.tf
+
+      # import personal GPG key to make verified cd deployment commits
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+      - name: Sign commit and push changes
+        run: |
+          git add main.tf
+          git commit -S -m "iac(cloudrun): deploy webapp container with tag ${{ github.event.client_payload.message }}"
+          git push
